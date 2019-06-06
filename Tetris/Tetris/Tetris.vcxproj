@@ -150,8 +150,9 @@
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Draw.h" />
-    <ClInclude Include="Logic.h" />
+    <ClInclude Include="Definitions.hpp" />
+    <ClInclude Include="Draw.hpp" />
+    <ClInclude Include="Logic.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -26,10 +26,13 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Draw.h">
+    <ClInclude Include="Draw.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Logic.h">
+    <ClInclude Include="Logic.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Definitions.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -2,6 +2,8 @@
 #define _LOGIC_
 
 #include <SFML/Graphics.hpp>
+#include <chrono>
+#include <thread>
 
 const int M = 20;
 const int N = 10;
@@ -12,6 +14,7 @@ private:
 	sf::Event e;
 	int direction;
 	int colorNumber;
+	int scores;
 	float elapsedTime;
 	float delay;
 
@@ -36,14 +39,16 @@ public:
 	Logic();
 	~Logic();
 	void getEvent(sf::RenderWindow&);
+	void waiting();
 	void move();
+	bool isRegular();
 	void rotate();
 	void setTetrominos();
-	void rowBlasting();
+	int rowBlasting();
 	void check();
 	void setElapsedTime(float);
 	inline void  resetParameters() { direction = 0; delay = 0.5; };
-	void end(sf::RenderWindow&);
+	void end(sf::Sprite& s,sf::RenderWindow&);
 };
 
 #endif
