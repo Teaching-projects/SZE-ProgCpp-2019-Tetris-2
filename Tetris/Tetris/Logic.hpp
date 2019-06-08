@@ -25,15 +25,17 @@ private:
 		int y;
 	} a[4], b[4];
 
-	int tetriminos[7][4] = {
-		0,2,4,6, 
-		0,1,2,4, 
-		0,2,4,5, 
-		0,1,2,3, 
-		0,2,3,5, 
-		1,2,3,4, 
-		0,2,3,4, 
+
+	int tetrominos[7][8]{	//0-3 x  4-7 y
+		{0,0,0,0,0,1,2,3}, //I
+		{0,1,0,0,0,0,1,2}, //J
+		{0,0,0,1,0,1,2,2}, //L
+		{0,1,0,1,0,0,1,1}, //O
+		{0,0,1,1,0,1,1,2}, //S
+		{1,0,1,0,0,1,1,2}, //Z
+		{0,0,1,0,0,1,1,2}  //T
 	};
+
 
 public:
 	Logic();
@@ -48,7 +50,7 @@ public:
 	void check();
 	void setElapsedTime(float);
 	inline void  resetParameters() { direction = 0; delay = 0.5; };
-	void end(sf::Sprite& s,sf::RenderWindow&);
+	void end(sf::Sprite& s, sf::RenderWindow&);
 };
 
 #endif

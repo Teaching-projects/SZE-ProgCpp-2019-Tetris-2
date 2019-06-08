@@ -1,9 +1,10 @@
 #include "Logic.hpp"
 
-Logic::Logic() :direction(0), colorNumber(1), elapsedTime(0), delay(0.5), a{ 1,1,1,0,2,0,0,0 }, b{0}, scores(0){}
-Logic::~Logic(){}
 
-void Logic::getEvent(sf::RenderWindow& window){
+Logic::Logic() :direction(0), colorNumber(1), elapsedTime(0), delay(0.5), a{ 0,0,0,1,1,1,0,2 }, b{ 0 }, scores(0){}
+Logic::~Logic() {}
+
+void Logic::getEvent(sf::RenderWindow& window) {
 	if (window.pollEvent(e)) {
 		if (e.type == sf::Event::Closed)window.close();
 		else if (e.type == sf::Event::KeyPressed) {
@@ -25,7 +26,7 @@ void Logic::getEvent(sf::RenderWindow& window){
 	}
 }
 
-void Logic::waiting(){
+void Logic::waiting() {
 	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 }
 
@@ -33,24 +34,22 @@ void Logic::setElapsedTime(float time) {
 	elapsedTime += time;
 }
 
-void Logic::check(){
+void Logic::check() {
 	bool orderly = true;
 	orderly = isRegular();
-	if (!orderly) {
-		for (int i = 0; i < 4; i++)a[i] = b[i];
-	}
+	if (!orderly)for (int i = 0; i < 4; i++)a[i] = b[i];
 }
 
 bool  Logic::isRegular() {
 	bool orderly = true;
 	for (int i = 0; i < 4; i++) {
-		if (a[i].x < 0 || a[i].x >= N || a[i].y >= M) orderly = false;
-		else if (matrix[a[i].y][a[i].x]) orderly = false;
+		if (a[i].x < 0 || a[i].x >= N || a[i].y >= M)orderly = false;
+		else if (matrix[a[i].y][a[i].x])orderly = false;
 	}
 	return orderly;
 }
 
-void Logic::move(){
+void Logic::move() {
 	for (int i = 0; i < 4; i++) {
 		b[i] = a[i];
 		a[i].x += direction;
@@ -58,18 +57,19 @@ void Logic::move(){
 	check();
 }
 
-void Logic::rotate(){
-	Point p = a[1];
-	for (int i = 0; i < 4; i++){
-		int x = a[i].y - p.y;
-		int y = a[i].x - p.x;
-		a[i].x = p.x - x;
-		a[i].y = p.y + y;
+void Logic::rotate() {
+	Point o = a[1];				  //The point around which we rotate
+	Point t;
+	for (int i = 0; i < 4; i++) {
+		t.x = a[i].x;
+		t.y = a[i].y;
+		a[i].x = -t.y + o.x + o.y;
+		a[i].y = t.x - o.x + o.y;
 	}
 	check();
 }
 
-void Logic::setTetrominos(){
+void Logic::setTetrominos() {
 	if (elapsedTime > delay) {
 		for (int i = 0; i < 4; i++) {
 			b[i] = a[i];
@@ -87,15 +87,15 @@ void Logic::setTetrominos(){
 			colorNumber = rand() % 7 + 1;
 			int n = rand() % 7;
 			for (int i = 0; i < 4; i++) {
-				a[i].x = tetriminos[n][i] % 2;
-				a[i].y = tetriminos[n][i] / 2;
+				a[i].x = tetrominos[n][i];
+				a[i].y = tetrominos[n][i + 4];
 			}
 		}
 		elapsedTime = 0;
 	}
 }
 
-int Logic::rowBlasting(){
+int Logic::rowBlasting() {
 	int k = M - 1;
 	for (int i = k; i > 0; i--) {
 		int count = 0;
@@ -109,7 +109,7 @@ int Logic::rowBlasting(){
 	return scores;
 }
 
-void Logic::end(sf::Sprite& s,sf::RenderWindow& window) {
+void Logic::end(sf::Sprite& s, sf::RenderWindow& window) {
 	for (int i = 0; i < N; i++) {
 		if (matrix[0][i]) {
 			window.draw(s);
