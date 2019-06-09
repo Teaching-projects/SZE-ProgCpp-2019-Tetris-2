@@ -2,15 +2,16 @@
 #define _DRAW_
 
 #include "Definitions.hpp"
+#include "Logic.hpp"
 
-class Draw {
+	class Draw {
 
-public:
-	Draw();
-	~Draw();
-	void setFont(sf::Text&, sf::Text&,sf::Font&);
-	void drawing(Logic&,sf::RenderWindow&,sf::Sprite&, sf::Text&, sf::Text&,int);
-};
+	public:
+		Draw();
+		~Draw();
+		void setFont(sf::Text&, sf::Text&, sf::Font&);
+		void drawing(Logic&, sf::RenderWindow&, sf::Sprite&, sf::Text&, sf::Text&, int);
+	};
 
 #endif
 

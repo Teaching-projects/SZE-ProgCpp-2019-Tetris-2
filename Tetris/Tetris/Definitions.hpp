@@ -1,13 +1,5 @@
 #ifndef _DEFINITIONS_
 
-#include <SFML/Graphics.hpp>
-#include "Logic.hpp"
-#include "Draw.hpp"
-#include <stdlib.h>
-#include <stdio.h>
-
-#define _DEFINITIONS_
-
 #define SCREEN_WIDTH 320
 #define SCREEN_HEIGHT 480
 
@@ -20,4 +12,3 @@
 #define APPLICATION_NAME "Tetris"
 #define FONT_NAME "Fonts/Lhandw.ttf"
 #endif
-
