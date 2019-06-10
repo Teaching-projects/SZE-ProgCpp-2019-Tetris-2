@@ -1,5 +1,6 @@
 #include "Logic.hpp"
 
+namespace Tetris{
 	Logic::Logic() :direction(0), colorNumber(1), elapsedTime(0), delay(0.5), a{ 0,0,0,1,1,1,0,2 }, b{ 0 }, scores(0){} //spec a 
 	Logic::~Logic() {}
 
@@ -25,26 +26,17 @@
 		}
 	}
 
-	void Logic::waiting() {
-		std::this_thread::sleep_for(std::chrono::milliseconds(1200));
-	}
-
 	void Logic::setElapsedTime(float time) {
 		elapsedTime += time;
 	}
 
-	void Logic::check() {
-		bool orderly = true;
-		orderly = isRegular();
-		if (!orderly)for (int i = 0; i < 4; i++)a[i] = b[i];
-	}
-
-	bool  Logic::isRegular() {
+	bool Logic::check() {
 		bool orderly = true;
 		for (int i = 0; i < 4; i++) {
 			if (a[i].x < 0 || a[i].x >= N || a[i].y >= M)orderly = false;
 			else if (matrix[a[i].y][a[i].x])orderly = false;
 		}
+		if (!orderly)for (int i = 0; i < 4; i++)a[i] = b[i];
 		return orderly;
 	}
 
@@ -57,7 +49,7 @@
 	}
 
 	void Logic::rotate() {
-		Point o = a[1];				  //The point around which we rotate
+		Point o = a[1];												//The point around which we rotate
 		Point t;
 		for (int i = 0; i < 4; i++) {
 			t.x = a[i].x;
@@ -68,7 +60,7 @@
 		check();
 	}
 
-	void Logic::setTetrominos() {
+	void Logic::fall() {
 		if (elapsedTime > delay) {
 			for (int i = 0; i < 4; i++) {
 				b[i] = a[i];
@@ -76,21 +68,22 @@
 			}
 
 			bool isNotGround = true;
-			isNotGround = isRegular();
+			isNotGround = check();
 
-			if (!isNotGround) {
-				for (int i = 0; i < 4; i++) {
-					matrix[b[i].y][b[i].x] = colorNumber;
-				}
-
-				colorNumber = 1 + std::rand() / ((RAND_MAX + 1u) / 7);	//1-7
-				int n = std::rand() / (RAND_MAX / 6);					//1-6
-				for (int i = 0; i < 4; i++) {
-					a[i].x = tetrominos[n][i];
-					a[i].y = tetrominos[n][i + 4];
-				}
-			}
+			if (!isNotGround)getTetromino();						   //Tetromino should not fall further		
 			elapsedTime = 0;
+		}
+	}
+	void Logic::getTetromino() {
+		for (int i = 0; i < 4; i++) {
+			matrix[a[i].y][a[i].x] = colorNumber;
+		}
+
+		colorNumber = 1 + std::rand() / ((RAND_MAX + 1u) / 7);	//1-7
+		int n = std::rand() / (RAND_MAX / 6);					//1-6
+		for (int i = 0; i < 4; i++) {
+			a[i].x = tetrominos[n][i];
+			a[i].y = tetrominos[n][i + 4];
 		}
 	}
 
@@ -109,7 +102,7 @@
 	}
 
 	void Logic::end(sf::Sprite& s, sf::RenderWindow& window) {
-		for (int i = 0; i < N; i++) {
+		for (int i = 0; i < N && window.isOpen(); i++) {
 			if (matrix[0][i]) {
 				window.draw(s);
 				window.display();
@@ -118,3 +111,4 @@
 			}
 		}
 	}
+}	

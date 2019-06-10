@@ -5,6 +5,7 @@
 #include <chrono>
 #include <thread>
 
+namespace Tetris{
 	const int M = 20;
 	const int N = 10;
 
@@ -25,7 +26,6 @@
 			int y;
 		} a[4], b[4];
 
-
 		int tetrominos[7][8]{	//0-3 x  4-7 y
 			{0,0,0,0,0,1,2,3}, //I
 			{0,1,0,0,0,0,1,2}, //J
@@ -41,16 +41,17 @@
 		Logic();
 		~Logic();
 		void getEvent(sf::RenderWindow&);
-		void waiting();
 		void move();
-		bool isRegular();
 		void rotate();
-		void setTetrominos();
+		void fall();
 		int rowBlasting();
-		void check();
+		bool check();
+		void getTetromino();
 		void setElapsedTime(float);
-		inline void  resetParameters() { direction = 0; delay = 0.5; };
 		void end(sf::Sprite& s, sf::RenderWindow&);
+		inline void waiting() { std::this_thread::sleep_for(std::chrono::milliseconds(1200));};
+		inline void  resetParameters() { direction = 0; delay = 0.5; };
 	};
+}
 
 #endif

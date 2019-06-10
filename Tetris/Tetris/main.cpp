@@ -10,8 +10,8 @@
 		float time;
 		int score;
 
-		Draw draw;
-		Logic gameLogic;
+		Tetris::Draw draw;
+		Tetris::Logic gameLogic;
 		sf::Clock clock;
 		sf::Font font;
 
@@ -44,7 +44,7 @@
 			clock.restart();
 			gameLogic.setElapsedTime(time);
 			gameLogic.move();
-			gameLogic.setTetrominos();
+			gameLogic.fall();
 			score = gameLogic.rowBlasting();
 			gameLogic.resetParameters();
 			window.draw(background);

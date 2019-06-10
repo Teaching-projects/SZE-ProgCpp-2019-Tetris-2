@@ -1,5 +1,7 @@
 #include "Draw.hpp"
 
+
+namespace Tetris{
 	Draw::Draw() {}
 	Draw::~Draw() {}
 
@@ -25,7 +27,7 @@
 		for (int i = 0; i < M; i++) {
 			for (int j = 0; j < N; j++) {
 				if (gameLogic.matrix[i][j]) {
-					s.setTextureRect(sf::IntRect(gameLogic.matrix[i][j] * 18, 0, 18, 18));
+					s.setTextureRect(sf::IntRect(gameLogic.matrix[i][j] * 18, 0, 18, 18));	//Set the sub-rectangle of the texture that the sprite will display.
 					s.setPosition(j * 18, i * 18);
 					s.move(20, 30);
 					window.draw(s);
@@ -41,3 +43,6 @@
 			window.draw(s);
 		}
 	}
+}
+
+	
