@@ -26,7 +26,7 @@ namespace Tetris{
 		}
 	}
 
-	void Logic::setElapsedTime(float time) {
+	void Logic::setElapsedTime(const float time) {
 		elapsedTime += time;
 	}
 
@@ -101,7 +101,7 @@ namespace Tetris{
 		return scores;
 	}
 
-	void Logic::end(sf::Sprite& s, sf::RenderWindow& window) {
+	void Logic::end(const sf::Sprite& s, sf::RenderWindow& window) {
 		for (int i = 0; i < N && window.isOpen(); i++) {
 			if (matrix[0][i]) {
 				window.draw(s);

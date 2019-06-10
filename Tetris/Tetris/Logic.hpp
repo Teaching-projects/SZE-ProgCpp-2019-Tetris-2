@@ -26,7 +26,7 @@ namespace Tetris{
 			int y;
 		} a[4], b[4];
 
-		int tetrominos[7][8]{	//0-3 x  4-7 y
+		const int tetrominos[7][8]{	//0-3 x  4-7 y
 			{0,0,0,0,0,1,2,3}, //I
 			{0,1,0,0,0,0,1,2}, //J
 			{0,0,0,1,0,1,2,2}, //L
@@ -35,7 +35,6 @@ namespace Tetris{
 			{1,0,1,0,0,1,1,2}, //Z
 			{0,0,1,0,0,1,1,2}  //T
 		};
-
 
 	public:
 		Logic();
@@ -47,8 +46,8 @@ namespace Tetris{
 		int rowBlasting();
 		bool check();
 		void getTetromino();
-		void setElapsedTime(float);
-		void end(sf::Sprite& s, sf::RenderWindow&);
+		void setElapsedTime(const float);
+		void end(const sf::Sprite&, sf::RenderWindow&);
 		inline void waiting() { std::this_thread::sleep_for(std::chrono::milliseconds(1200));};
 		inline void  resetParameters() { direction = 0; delay = 0.5; };
 	};

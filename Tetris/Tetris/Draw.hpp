@@ -10,9 +10,8 @@ namespace Tetris {
 	public:
 		Draw();
 		~Draw();
-		void setFont(sf::Text&, sf::Text&, sf::Font&);
-		void drawing(Logic&, sf::RenderWindow&, sf::Sprite&, sf::Text&, sf::Text&, int);
+		void setFont(sf::Text&, sf::Text&,sf::Font&);
+		void drawing(Logic&, sf::RenderWindow&, sf::Sprite&,const sf::Text&, sf::Text&, const int);
 	};
 }
 #endif
-

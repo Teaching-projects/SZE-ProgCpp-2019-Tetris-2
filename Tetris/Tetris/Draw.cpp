@@ -1,6 +1,5 @@
 #include "Draw.hpp"
 
-
 namespace Tetris{
 	Draw::Draw() {}
 	Draw::~Draw() {}
@@ -19,7 +18,7 @@ namespace Tetris{
 		scores.setFont(font);
 	}
 
-	void Draw::drawing(Logic& gameLogic, sf::RenderWindow& window, sf::Sprite& s, sf::Text& sc, sf::Text& score, int scores) {
+	void Draw::drawing(Logic& gameLogic, sf::RenderWindow& window, sf::Sprite& s, const sf::Text& sc, sf::Text& score, const int scores) {
 		window.draw(sc);
 		score.setString(std::to_string(scores));
 		window.draw(score);
@@ -44,5 +43,3 @@ namespace Tetris{
 		}
 	}
 }
-
-	
